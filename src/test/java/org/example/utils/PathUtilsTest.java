@@ -12,7 +12,7 @@ class PathUtilsTest {
 
     @Test
     void testCalculateTotalScore() throws IOException {
-        Grid grid = new Grid(TEST_GRID_FILE, 1);
+        Grid grid = new Grid(TEST_GRID_FILE);
 
         int totalScore = PathUtils.calculateTotalScore(TEST_OUTPUT_PATH_LIST, grid);
         assertEquals(15, totalScore);

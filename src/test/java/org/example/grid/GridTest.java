@@ -12,7 +12,7 @@ class GridTest {
 
     @Test
     void shouldInitialiseGridCorrectly() throws IOException {
-        Grid grid = new Grid(TEST_GRID_FILE, 1);
+        Grid grid = new Grid(TEST_GRID_FILE);
 
         assertEquals(3, grid.getGridRowSize());
         assertEquals(3, grid.getGridColSize());
@@ -22,7 +22,7 @@ class GridTest {
 
     @Test
     void shouldSetCellScoreToZeroWhenVisited() throws IOException {
-        Grid grid = new Grid(TEST_GRID_FILE, 1);
+        Grid grid = new Grid(TEST_GRID_FILE);
 
         grid.visitCell(1, 1);
         assertEquals(0, grid.getGridCellScore(1, 1));
@@ -30,7 +30,7 @@ class GridTest {
 
     @Test
     void shouldUpdateScoresCorrectly() throws IOException {
-        Grid grid = new Grid(TEST_GRID_FILE, 1);
+        Grid grid = new Grid(TEST_GRID_FILE);
 
         grid.visitCell(1, 1);
         assertEquals(0, grid.getGridCellScore(1, 1));

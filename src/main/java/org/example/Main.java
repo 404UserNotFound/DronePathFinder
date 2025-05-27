@@ -34,7 +34,7 @@ public class Main {
                 "Choose grid size:\n1. 20x20\n2. 100x100\n3. 1000x1000\n", 1, 3
         );
         String gridFile = UserInputUtils.getGridFile(gridSizeChoice);
-        return new Grid(gridFile, 1);
+        return new Grid(gridFile);
     }
 
     private static int[] getStartCoordinates(Grid grid) {

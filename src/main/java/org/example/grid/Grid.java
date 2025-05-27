@@ -18,10 +18,9 @@ public class Grid {
      * Constructs a Grid object from a file and initialises scores and increments.
      *
      * @param sourceFile   Path to the grid file.
-     * @param incrementRate Increment rate for score updates.
      * @throws IOException If the file cannot be read or is empty.
      */
-    public Grid(String sourceFile, int incrementRate) throws IOException {
+    public Grid(String sourceFile) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(sourceFile));
 
         if (lines.isEmpty()) {
@@ -35,13 +34,14 @@ public class Grid {
         this.originalScore = new int[rows][cols];
         this.increment = new int[rows][cols];
 
+        int defaultIncrementRate = 1;
         for (int i = 0; i < rows; i++) {
             String[] values = lines.get(i).split("\\s+");
             for (int j = 0; j < cols; j++) {
                 int cellValue = Integer.parseInt(values[j]);
                 grid[i][j] = cellValue;
                 originalScore[i][j] = cellValue;
-                increment[i][j] = incrementRate;
+                increment[i][j] = defaultIncrementRate;
             }
         }
     }
