@@ -28,29 +28,6 @@ public class PathUtils {
     }
 
     /**
-     * Formats the path into a readable string.
-     *
-     * @param path The list of coordinates representing the path.
-     * @return A formatted string representation of the path.
-     */
-    public static String formatPath(List<int[]> path) {
-        if (path.isEmpty()) {
-            return "No path found.";
-        }
-
-        System.out.println("Best path found: ");
-        StringBuilder pathOutput = new StringBuilder();
-        for (int i = 0; i < path.size(); i++) {
-            int[] step = path.get(i);
-            pathOutput.append("(").append(step[0]).append(", ").append(step[1]).append(")");
-            if (i < path.size() - 1) {
-                pathOutput.append(" -> \n");
-            }
-        }
-        return pathOutput.toString();
-    }
-
-    /**
      * Calculates the total score collected along the path.
      *
      * @param path The list of coordinates representing the path.
@@ -59,8 +36,10 @@ public class PathUtils {
      */
     public static int calculateTotalScore(List<int[]> path, Grid grid) {
         int totalScore = 0;
-        for (int[] step : path) {
-            totalScore += grid.getGridCellScore(step[0], step[1]);
+        for (int[] coordinate : path) {
+            int x = coordinate[0];
+            int y = coordinate[1];
+            totalScore += grid.getGridCellScore(x, y);
         }
         return totalScore;
     }
@@ -72,7 +51,13 @@ public class PathUtils {
      * @param grid The grid containing the scores for each cell.
      */
     public static void printCollectedScoreAndPath(List<int[]> path, Grid grid) {
-        System.out.println(formatPath(path));
+        System.out.println("Best path found: \n(x, y, score)");
+        for (int[] coordinate : path) {
+            int x = coordinate[0];
+            int y = coordinate[1];
+            int cellScore = grid.getGridCellScore(x, y);
+            System.out.printf("(%d, %d) [%d]%n", x, y, cellScore);
+        }
         int score = calculateTotalScore(path, grid);
         System.out.println("Total Score Collected: " + score);
     }

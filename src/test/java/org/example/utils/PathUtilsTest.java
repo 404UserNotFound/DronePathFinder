@@ -11,16 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class PathUtilsTest {
 
     @Test
-    void testFormatPath() {
-
-        String formattedPath = PathUtils.formatPath(TEST_OUTPUT_PATH_LIST);
-
-        assertTrue(formattedPath.contains("(0, 0) ->"));
-        assertTrue(formattedPath.contains("(1, 1) ->"));
-        assertTrue(formattedPath.contains("(2, 2)"));
-    }
-
-    @Test
     void testCalculateTotalScore() throws IOException {
         Grid grid = new Grid(TEST_GRID_FILE, 1);
 
