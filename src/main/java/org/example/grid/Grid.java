@@ -1,5 +1,6 @@
 package org.example.grid;
 
+import org.example.node.Node;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,18 +43,6 @@ public class Grid {
                 originalScore[i][j] = cellValue;
                 increment[i][j] = incrementRate;
             }
-        }
-    }
-
-    /**
-     * Prints the current state of the grid to the console.
-     */
-    public void printGrid() {
-        for (int[] row : grid) {
-            for (int value : row) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
         }
     }
 
@@ -103,12 +92,12 @@ public class Grid {
     /**
      * Updates the scores of all cells based on their original scores and increment rates.
      */
-    public void updateScores() {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] < originalScore[i][j]) {
-                    grid[i][j] = Math.min(originalScore[i][j], grid[i][j] + increment[i][j]);
-                }
+    public void updateScores(List<Node> visitedNodes) {
+        for (Node node : visitedNodes) {
+            int x = node.getX();
+            int y = node.getY();
+            if (grid[x][y] < originalScore[x][y]) {
+                grid[x][y] = Math.min(originalScore[x][y], grid[x][y] + increment[x][y]);
             }
         }
     }
