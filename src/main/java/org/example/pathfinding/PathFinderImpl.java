@@ -6,14 +6,13 @@ import org.example.utils.PathUtils;
 
 import java.util.*;
 
+import static org.example.constants.Constants.REVISIT_PENALTY_WEIGHT;
+
 public class PathFinderImpl implements PathFinder {
     private static final int[][] DIRECTIONS = {
             {-1, 0}, {1, 0}, {0, -1}, {0, 1},
             {-1, -1}, {-1, 1}, {1, -1}, {1, 1}
     };
-
-    // Penalty weight to discourage revisiting nodes
-    private static final int REVISIT_PENALTY_WEIGHT = 10;
 
     /**
      * Entry point for finding the best scoring path within specified time and step limits.
