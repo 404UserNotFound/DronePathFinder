@@ -7,7 +7,7 @@ This project implements a pathfinding algorithm using Java. It includes utilitie
 
 ## Prerequisites
 - **Java**: JDK 21 (tested with Corretto 21.0.7)
-- **Maven**: Version 3.6 or higher
+- **Maven**: Version 3.6 or higher (tested with Maven 3.9.9)
 
 ---
 
@@ -19,11 +19,10 @@ This project implements a pathfinding algorithm using Java. It includes utilitie
    ```
 
 2. **Run the Application**:
-   Execute the main class using Maven:
+   Run the Main class. You can use below Maven command:
    ```bash
    mvn exec:java -Dexec.mainClass="org.example.Main"
    ```
-
 ---
 
 ## How to Run Tests

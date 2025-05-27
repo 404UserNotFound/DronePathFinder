@@ -9,4 +9,7 @@ public final class Constants {
     public static final String GRID_FILE_20_LOCATION = "grids/20.txt";
     public static final String GRID_FILE_100_LOCATION = "grids/100.txt";
     public static final String GRID_FILE_1000_LOCATION = "grids/1000.txt";
+
+// Penalty weight to discourage revisiting nodes
+    public static final int REVISIT_PENALTY_WEIGHT = 10;
 }
