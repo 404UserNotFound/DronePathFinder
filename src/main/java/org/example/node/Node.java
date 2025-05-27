@@ -16,12 +16,23 @@ public class Node {
         this.parent = parent;
     }
 
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public int getScore() { return score; }
-    public int getTime() { return time; }
-    public int getFScore() { return fScore; }
-    public Node getParent() { return parent; }
+    public int getX() {
+        return x;
+    }
 
-    public void setFScore(int fScore) { this.fScore = fScore; }
+    public int getY() {
+        return y;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
 }

@@ -1,8 +1,10 @@
 package org.example.grid;
 
+import org.example.node.Node;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -17,11 +19,16 @@ public class Grid {
      * Constructs a Grid object from a file and initialises scores and increments.
      *
      * @param sourceFile   Path to the grid file.
-     * @param incrementRate Increment rate for score updates.
      * @throws IOException If the file cannot be read or is empty.
      */
-    public Grid(String sourceFile, int incrementRate) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(sourceFile));
+    public Grid(String sourceFile) throws IOException {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(sourceFile);
+        if (inputStream == null) {
+            throw new IOException("Grid file not found.");
+        }
+        List<String> lines = new BufferedReader(new InputStreamReader(inputStream))
+                .lines()
+                .toList();
 
         if (lines.isEmpty()) {
             throw new IOException("Grid file is empty.");
@@ -34,26 +41,15 @@ public class Grid {
         this.originalScore = new int[rows][cols];
         this.increment = new int[rows][cols];
 
+        int defaultIncrementRate = 1;
         for (int i = 0; i < rows; i++) {
             String[] values = lines.get(i).split("\\s+");
             for (int j = 0; j < cols; j++) {
                 int cellValue = Integer.parseInt(values[j]);
                 grid[i][j] = cellValue;
                 originalScore[i][j] = cellValue;
-                increment[i][j] = incrementRate;
+                increment[i][j] = defaultIncrementRate;
             }
-        }
-    }
-
-    /**
-     * Prints the current state of the grid to the console.
-     */
-    public void printGrid() {
-        for (int[] row : grid) {
-            for (int value : row) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
         }
     }
 
@@ -103,12 +99,12 @@ public class Grid {
     /**
      * Updates the scores of all cells based on their original scores and increment rates.
      */
-    public void updateScores() {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] < originalScore[i][j]) {
-                    grid[i][j] = Math.min(originalScore[i][j], grid[i][j] + increment[i][j]);
-                }
+    public void updateScores(List<Node> visitedNodes) {
+        for (Node node : visitedNodes) {
+            int x = node.getX();
+            int y = node.getY();
+            if (grid[x][y] < originalScore[x][y]) {
+                grid[x][y] = Math.min(originalScore[x][y], grid[x][y] + increment[x][y]);
             }
         }
     }
