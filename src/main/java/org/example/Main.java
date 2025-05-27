@@ -22,12 +22,12 @@ public class Main {
             int startX = UserInputUtils.getValidatedInt("Enter start position x from 0 to " + gridRowSize + "\n", 0, gridRowSize);
             int startY = UserInputUtils.getValidatedInt("Enter start position y from 0 to " + gridColSize + "\n", 0, gridColSize);
             int timeLimit = UserInputUtils.getValidatedInt("Enter max duration T (ms): \n", MIN_DURATION_MS, MAX_DURATION_MS);
-            int timeSteps = timeLimit / DEFAULT_INCREMENT_RATE;
+            int timeSteps = UserInputUtils.getValidatedInt("Enter total number of time steps (t): \n", 1, Integer.MAX_VALUE);
 
             PathFinderImpl pathFinder = new PathFinderImpl();
-            List<int[]> path = pathFinder.findBestPath(newGrid, timeSteps, timeLimit, startX, startY);
+            List<int[]> bestPath = pathFinder.findBestPath(newGrid, timeSteps, timeLimit, startX, startY);
+            PathUtils.printCollectedScoreAndPath(bestPath, newGrid);
 
-            PathUtils.printCollectedScoreAndPath(path, newGrid);
         } catch (IOException e) {
             System.out.println("Error loading grid" + e.getMessage());
         } catch (Exception e) {
