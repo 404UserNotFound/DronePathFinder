@@ -6,7 +6,7 @@ public final class Constants {
     public static final int MAX_DURATION_MS = 60000;
 
 //    Grid test file locations
-    public static final String GRID_FILE_20_LOCATION = "src/main/resources/grids/20.txt";
-    public static final String GRID_FILE_100_LOCATION = "src/main/resources/grids/100.txt";
-    public static final String GRID_FILE_1000_LOCATION = "src/main/resources/grids/1000.txt";
+    public static final String GRID_FILE_20_LOCATION = "grids/20.txt";
+    public static final String GRID_FILE_100_LOCATION = "grids/100.txt";
+    public static final String GRID_FILE_1000_LOCATION = "grids/1000.txt";
 }

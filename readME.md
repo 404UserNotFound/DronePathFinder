@@ -15,17 +15,10 @@ This project implements a pathfinding algorithm using Java. It includes utilitie
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/404UserNotFound/pathfinding-algorithm.git
-   cd pathfinding-algorithm
+   git clone https://github.com/404UserNotFound/DronePathFinder.git
    ```
 
-2. **Build the Project**:
-   Run the following Maven command to compile the project:
-   ```bash
-   mvn clean install
-   ```
-
-3. **Run the Application**:
+2. **Run the Application**:
    Execute the main class using Maven:
    ```bash
    mvn exec:java -Dexec.mainClass="org.example.Main"
@@ -59,16 +52,23 @@ This project implements a pathfinding algorithm using Java. It includes utilitie
 2. **Generate a JAR File**:
    The packaged JAR file will be located in the `target` directory:
    ```bash
-   target/pathfinding-algorithm-1.0-SNAPSHOT.jar
+   cd target
    ```
 
 3. **Run the JAR File**:
    Execute the JAR file using:
    ```bash
-   java -jar target/pathfinding-algorithm-1.0-SNAPSHOT.jar
+   java -jar DronePathFinder-1.0-SNAPSHOT.jar
    ```
-
-## Additional Notes
-- Ensure the grid file is correctly formatted and accessible.
-- Modify the `Constants` class to adjust default parameters like increment rates.
+   
+## How to Use the Application
+1. When you run the application it will prompt you to select which grid you want to use.
+2. You can choose from the following options:
+   - **1**: 20x20 grid
+   - **2**: 100x100 grid
+   - **3**: 1000x1000 grid
+3. After selecting a grid, you will be prompted to enter the starting x and y coordinates for the pathfinding algorithm.
+4. Next you will enter the time limit in milliseconds.
+5. Finally, you will enter the time-step limit, the app will run until time limit or step limit is reached.
+6. The app will return the co-ordinates travelled, the value of each co-ordinate, along with the total accrued score.
 ---

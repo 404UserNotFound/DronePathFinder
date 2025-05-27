@@ -1,9 +1,10 @@
 package org.example.grid;
 
 import org.example.node.Node;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -21,7 +22,13 @@ public class Grid {
      * @throws IOException If the file cannot be read or is empty.
      */
     public Grid(String sourceFile) throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(sourceFile));
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(sourceFile);
+        if (inputStream == null) {
+            throw new IOException("Grid file not found.");
+        }
+        List<String> lines = new BufferedReader(new InputStreamReader(inputStream))
+                .lines()
+                .toList();
 
         if (lines.isEmpty()) {
             throw new IOException("Grid file is empty.");
