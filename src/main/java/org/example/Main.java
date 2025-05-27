@@ -12,26 +12,38 @@ import static org.example.constants.Constants.*;
 
 public class Main {
     public static void main(String[] args) {
-
         try {
-            Grid newGrid = new Grid(GRID_FILE_20_LOCATION, DEFAULT_INCREMENT_RATE);
-
-            int gridRowSize = (newGrid.getGridRowSize() - 1);
-            int gridColSize = (newGrid.getGridColSize() - 1);
-
-            int startX = UserInputUtils.getValidatedInt("Enter start position x from 0 to " + gridRowSize + "\n", 0, gridRowSize);
-            int startY = UserInputUtils.getValidatedInt("Enter start position y from 0 to " + gridColSize + "\n", 0, gridColSize);
+            Grid grid = initialiseGrid();
+            int[] startCoordinates = getStartCoordinates(grid);
             int timeLimit = UserInputUtils.getValidatedInt("Enter max duration T (ms): \n", MIN_DURATION_MS, MAX_DURATION_MS);
             int timeSteps = UserInputUtils.getValidatedInt("Enter total number of time steps (t): \n", 1, Integer.MAX_VALUE);
 
             PathFinderImpl pathFinder = new PathFinderImpl();
-            List<int[]> bestPath = pathFinder.findBestPath(newGrid, timeSteps, timeLimit, startX, startY);
-            PathUtils.printCollectedScoreAndPath(bestPath, newGrid);
+            List<int[]> bestPath = pathFinder.findBestPath(grid, timeSteps, timeLimit, startCoordinates[0], startCoordinates[1]);
 
+            PathUtils.printCollectedScoreAndPath(bestPath, grid);
         } catch (IOException e) {
-            System.out.println("Error loading grid" + e.getMessage());
+            System.out.println("Error loading grid: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Your input was invalid: " + e);
+            System.out.println("Your input was invalid: " + e.getMessage());
         }
+    }
+
+    private static Grid initialiseGrid() throws IOException {
+        int gridSizeChoice = UserInputUtils.getValidatedInt(
+                "Choose grid size:\n1. 20x20\n2. 100x100\n3. 1000x1000\n", 1, 3
+        );
+        String gridFile = UserInputUtils.getGridFile(gridSizeChoice);
+        return new Grid(gridFile, 1);
+    }
+
+    private static int[] getStartCoordinates(Grid grid) {
+        int startX = UserInputUtils.getValidatedInt(
+                "Enter start position x from 0 to " + (grid.getGridRowSize() - 1) + "\n", 0, grid.getGridRowSize() - 1
+        );
+        int startY = UserInputUtils.getValidatedInt(
+                "Enter start position y from 0 to " + (grid.getGridColSize() - 1) + "\n", 0, grid.getGridColSize() - 1
+        );
+        return new int[]{startX, startY};
     }
 }
